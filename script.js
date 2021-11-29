@@ -6,16 +6,16 @@ let root = document.getElementById("root");
 
 let nav = document.createElement("nav");
 let navLogo = document.createElement("h1");
-navLogo.innerText = "LoginPage";
+navLogo.innerText = "MyLogin";
 nav.append(navLogo);
 
 let section = document.createElement("section");
 
 let footer = document.createElement("footer");
 let footerText1 = document.createElement("p");
-footerText1.innerText = "Footertext här";
+footerText1.innerText = "Contact us";
 let footerText2 = document.createElement("p");
-footerText2.innerText = "Footertext här också";
+footerText2.innerText = "name.lastname@medieinsitutet.se";
 footer.append(footerText1, footerText2);
 
 root.append(nav, section, footer);
