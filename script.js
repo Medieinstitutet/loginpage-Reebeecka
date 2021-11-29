@@ -1,3 +1,4 @@
+
 //Allt som alltid är på sidan
 
 let root = document.getElementById("root");
@@ -10,7 +11,6 @@ nav.append(navLogo);
 
 let section = document.createElement("section");
 
-
 let footer = document.createElement("footer");
 let footerText1 = document.createElement("p");
 footerText1.innerText = "Footertext här";
@@ -20,19 +20,55 @@ footer.append(footerText1, footerText2);
 
 root.append(nav, section, footer);
 
+//Funktion för innehåll
 render();
-//Kolla om användaren har janne och test i local storage
 
-//Om jaa (Man är inloggad)
 
 function render() {
-    if (localStorage.getItem("userName") === "janne" && localStorage.getItem("passWord") === "test") {
-        console.log("inloggad");
-    }
-    //Man är inte redan inloggad
-    else {
-        console.log("ej inloggad");
 
+    //Kolla om användaren har janne och test i local storage
+    if (localStorage.getItem("userName") === "janne" && localStorage.getItem("passWord") === "test") {
+
+        //Nu är du inloggad!
+        
+        //Rensar innehåll för att kunna lägga dit rätt innehåll
+        nav.innerHTML="";
+        section.innerHTML="";
+
+        //Skapar innehåll som är specifikt när man är inloggad
+
+        //NAV
+        let logoutBtn = document.createElement("button");
+        logoutBtn.innerText = "Log out!";
+        logoutBtn.addEventListener("click", logout);
+
+        //SECTION
+        let welcomeLogedin = document.createElement("h1");
+        welcomeLogedin.innerText = "Welcome " + localStorage.getItem("userName");
+
+        //Lägger till allt innnehåll som ska finnas i denna VY
+        nav.append(navLogo, logoutBtn);
+        section.append(welcomeLogedin);
+
+        //Trycker på logga ut; ta bort local storage och kör render() igen
+        function logout(){
+            localStorage.removeItem("userName");
+            localStorage.removeItem("passWord");
+            render();
+        }
+    }
+
+
+    else {
+        //Du är inte inloggad
+
+        //Rensar innehåll för att kunna lägga dit rätt innehåll
+        nav.innerHTML="";
+        section.innerHTML="";
+
+        //Skapar innehåll som är specifikt när man inte är inloggad
+
+        //NAV
         let inputUsername = document.createElement("input");
         inputUsername.setAttribute("type", "text");
         inputUsername.placeholder = "Username";
@@ -45,25 +81,49 @@ function render() {
         loginBtn.innerText = "Log in!";
         loginBtn.addEventListener("click", login);
 
+        //SECTION
+        let welcomeFirst = document.createElement("h1")
+        welcomeFirst.innerText="Welcome!";
 
-        nav.append(inputUsername, inputPassword, loginBtn);
+        let welcomeText = document.createElement("p")
+        welcomeText.innerText="Login for more fun!";
 
-        //Om man loggar in
+        //Lägger till allt innnehåll som ska finnas i denna VY
+        nav.append(navLogo, inputUsername, inputPassword, loginBtn);
+        section.append(welcomeFirst, welcomeText);
+
+        //När man trycker på loggin knapp
         function login() {
 
+            //Konverterar input till värde
+            let userName = inputUsername.value;
+            let passWord = inputPassword.value;
+
+            //Kollar om värden är rätt
+            if(userName==="janne" && passWord==="test"){
+               //Det är rätt, sparar i local storage och kör igenom stora funktionen igen
+               localStorage.setItem("userName", "janne");
+               localStorage.setItem("passWord", "test");
+               render();
+            }
+
+            //Om fel kommer till sida för felinlogg
+            else{
+
+                //Rensar innehåll för att kunna lägga till rätt
+                //Rensar ej Nav i denna då Nav inte ändras
+                section.innerHTML="";
+
+                //Skapar innehåll som är specifikt när man misslyckats med inloggning
+                let failhead = document.createElement("h1");
+                failhead.innerText = "Please try again!"
+                let failtext = document.createElement("p");
+                failtext.innerText = "Try again, but dont try to hack anyone!"
+
+                //Lägger till allt innnehåll som ska finnas i denna VY
+                section.append(failhead, failtext);
+
+            }
         }
     }
 }
-//Om Nej (Man är inte inloggad)
-
-//Skapa input värden
-//let userName = "janne";
-//let passWord = "test";
-
-//I loginrutan
-//if(userName==="janne" && passWord==="test"){
-   //Man är inloggad 
-//}
-//else{
-//Man skriver ej janne och test
-//}
