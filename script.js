@@ -27,13 +27,13 @@ render();
 function render() {
 
     //Kolla om användaren har janne och test i local storage
-    if (localStorage.getItem("userName") === "janne" && localStorage.getItem("passWord") === "test") {
+    if (localStorage.getItem("userName") === "janne" && localStorage.getItem("passWord") === "test" || localStorage.getItem("userName") === "rebecka" && localStorage.getItem("passWord") === "banan" ) {
 
         //Nu är du inloggad!
-        
+
         //Rensar innehåll för att kunna lägga dit rätt innehåll
-        nav.innerHTML="";
-        section.innerHTML="";
+        nav.innerHTML = "";
+        section.innerHTML = "";
 
         //Skapar innehåll som är specifikt när man är inloggad
 
@@ -51,7 +51,7 @@ function render() {
         section.append(welcomeLogedin);
 
         //Trycker på logga ut; ta bort local storage och kör render() igen
-        function logout(){
+        function logout() {
             localStorage.removeItem("userName");
             localStorage.removeItem("passWord");
             render();
@@ -63,8 +63,8 @@ function render() {
         //Du är inte inloggad
 
         //Rensar innehåll för att kunna lägga dit rätt innehåll
-        nav.innerHTML="";
-        section.innerHTML="";
+        nav.innerHTML = "";
+        section.innerHTML = "";
 
         //Skapar innehåll som är specifikt när man inte är inloggad
 
@@ -83,14 +83,15 @@ function render() {
 
         //SECTION
         let welcomeFirst = document.createElement("h1")
-        welcomeFirst.innerText="Welcome!";
+        welcomeFirst.innerText = "Welcome!";
 
         let welcomeText = document.createElement("p")
-        welcomeText.innerText="Login for more fun!";
+        welcomeText.innerText = "Login for more fun!";
 
         //Lägger till allt innnehåll som ska finnas i denna VY
         nav.append(navLogo, inputUsername, inputPassword, loginBtn);
         section.append(welcomeFirst, welcomeText);
+
 
         //När man trycker på loggin knapp
         function login() {
@@ -100,21 +101,23 @@ function render() {
             let passWord = inputPassword.value;
 
             //Kollar om värden är rätt
-            if(userName==="janne" && passWord==="test"){
-               //Det är rätt, sparar i local storage och kör igenom stora funktionen igen
-               localStorage.setItem("userName", "janne");
-               localStorage.setItem("passWord", "test");
-               render();
+            if (userName === "janne" && passWord === "test" || userName === "rebecka" && passWord === "banan") {
+                //Det är rätt, sparar i local storage och kör igenom stora funktionen igen
+                localStorage.setItem("userName", userName);
+                localStorage.setItem("passWord", passWord);
+                render();
             }
 
             //Om fel kommer till sida för felinlogg
-            else{
+            else {
 
                 //Rensar innehåll för att kunna lägga till rätt
                 //Rensar ej Nav i denna då Nav inte ändras
-                section.innerHTML="";
+                section.innerHTML = "";
 
                 //Skapar innehåll som är specifikt när man misslyckats med inloggning
+
+                //SECTION
                 let failhead = document.createElement("h1");
                 failhead.innerText = "Please try again!"
                 let failtext = document.createElement("p");

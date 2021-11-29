@@ -12,6 +12,14 @@ nav{
 section{
     background-color: green;
     height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+section h1{
+    font-size: 7rem;
+    text-transform: uppercase;
 }
 footer{
     background-color: blue;
