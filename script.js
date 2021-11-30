@@ -20,10 +20,10 @@ footer.append(footerText1, footerText2);
 
 root.append(nav, section, footer);
 
-//Funktion för innehåll
+//Kalla på funktion för att ladda dynamiskt innehåll
 render();
 
-
+//Funktion för innehåll
 function render() {
 
     //Kolla om användaren har janne och test i local storage
